@@ -2,33 +2,28 @@
 
 华为云部署spring cloud物理多组 eureka 示例项目,该项目主要是讲述如何在华为云 ServiceStage 平台上部署 spring cloud eureka ,实现高可用.
 
-## 华为云 部署eureka 集群
+## 使用华为云一键部署eureka高可用集群
 
-### 创建eureka 集群
-* 登录华为云账号
+* 登录华为微服务云应用平台[`ServiceStage` ](https://console.huaweicloud.com/servicestage)
 
-![华为云登录](readme/yun_login.PNG)
-
-* 进入`ServiceStage` 应用平台
-
-![华为云ServiceStage](readme/yun_servicestage.png)
+![华为云ServiceStage](docs/yun_servicestage.png)
 
 * 进入ServiceStage, 在 ` 应用上线`界面,点击 `创建应用` 
 
-![华为云创建应用](readme/yun_create_springcloud.png)
+![华为云创建应用](docs/yun_create_springcloud.png)
 
 * 选择 `SpringCloud 服务` 
 
-![创建spring cloud](readme/yun_springcloud.png)
+![创建spring cloud](docs/yun_springcloud.png)
 
 * eureka 参数配置
   * 基本 参数 配置
   
-  ![setting1](readme/yun_setting1.png)
+  ![setting1](docs/yun_setting1.png)
   
   * 容器规格配置
   
-  ![资源配置](readme/yun_setting_cpu.png)
+  ![资源配置](docs/yun_setting_cpu.png)
   
  > **`资源配置`** , 仅做参考: 
  > * 搭建 `eureka` 高可用集群,建议 实例数设置为` 3 `
@@ -49,41 +44,57 @@
  
 *  `创建应用` > `返回应用列表` , 查看自己部署的 eureka 集群, 注意 eureka 集群启动的时候较为缓慢,由于eureka 部署的时候安装了 `探针` 功能, 而实例的启动时间无法精确指定,所以在启动之前.实例列表会显示 `实例异常`,并不影响运行,第一个实例启动时间大约为 `一分半` ,启动成功后,该实例会显示`运行中`,然后启动第二个实例,直到所有的实例启动成功. 
  
- ![eureka 启动成功](readme/yum_chakan.png)
+ ![eureka 启动成功](docs/yum_chakan.png)
  
 ## 验证 erueka 高可用集群:
 
-* **集群内访问**: ps : 建议使用 服务名+ 端口的访问方式.  
+* **集群内访问**: 
 
-![curl_yun](readme/yun_curl.PNG) 
+![集群内健康检查](docs/yun_eureka_health.PNG)
 
-**健康检查**
-
-![集群内健康检查](readme/yun_eureka_health.PNG)
+Notes: 建议使用 服务名+ 端口的访问方式.  
 
 * **VPC内 访问** :
 
-![VPC 内部访问](readme/yun_VPC.PNG)
-
-**健康检查**
-
-![VPC内健康检查](readme/yun_vpc_health.PNG)
+![VPC内健康检查](docs/yun_vpc_health.PNG)
 
 * **公网访问** :
 
-![公网访问](readme/yun_eureka.png)
+![公网健康检查](docs/yun_gongwang_health.PNG)
 
-**健康检查**
+## 本地SpringCloud应用接入云上eureka集群
 
-![公网健康检查](readme/yun_gongwang_health.PNG)
+本例演示了2个本地SpringCloud应用[**eureka-client-provider**](/eureka-client-provider)(服务提供者)
+和[**eureka-client-consumer-feign**](/eureka-client-consumer-feign)(服务消费者)
+如何通过公网访问的`eureka`集群实现服务注册和服务发现.
 
-## 创建 eureka 生产者和消费者
+#### 启动服务提供者
 
-1. **eureka-client-provider** :  示例生产者
-2. **eureka-client-provider-copy** : 示例生产者
-3. **eureka-client-consumer-ribbon** : rest + ribbon 示例 消费者
-4. **eureka-client-consumer-feign** : Feign 示例 消费者
+本例中的服务提供者默认监听本机端口`8776`
 
-ps : 测试 轮询负载均衡,要同时启动 **eureka-client-provider** 和 **eureka-client-provider-copy** 模块.
+```bash
+cd eureka-client-provider
+mvn clean install
+java -Deureka.client.service-url.defaultZone=http://{eureka外部访问地址}/eureka/ -jar target/eureka-client-provider-0.0.1-SNAPSHOT.jar 
+```
+
+#### 启动服务消费者
+
+本例中的服务消费者默认监听本机端口`8778`
+
+```bash
+cd eureka-client-consumer-feign
+mvn clean install
+java -Deureka.client.service-url.defaultZone=http://{eureka外部访问地址}/eureka/ -jar target/eureka-client-consumer-feign-0.0.1-SNAPSHOT.jar 
+```
+
+#### 发起请求调用服务消费者
+
+```bash
+curl -s http://127.0.0.1:8778/sayHello
+# hello, huawei. There is cse with port : 8776
+```
+
+Notes: 以上服务消费者借助Feign能力调用服务提供者的接口,如果习惯使用RestTemplate,这里提供另一种实现[**eureka-client-consumer-ribbon**](/eureka-client-consumer-ribbon) 
 
 ## enjoy your eureka cluster ! 
