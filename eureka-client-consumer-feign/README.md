@@ -108,4 +108,4 @@
   ```
   * 启动 feign 消费者,并且测试.
   
-  ![feign 消费者](../readme/yum_feign.PNG)
+  ![feign 消费者](../docs/yum_feign.PNG)

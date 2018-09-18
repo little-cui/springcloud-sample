@@ -95,5 +95,5 @@
   
   * 启动消费者,并且测试 轮询机制. ps: 要启动两个provider 才能测试 Ribbon 简单的轮询负载均衡,对应模块 `eureka-client-provider` 和 `eureka-client-provider-copy`
   
-  ![消费者轮询](../readme/yun_ribbon.PNG)
+  ![消费者轮询](../docs/yun_ribbon.PNG)
 

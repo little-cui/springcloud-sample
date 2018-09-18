@@ -46,7 +46,7 @@
  
  ![eureka 启动成功](docs/yum_chakan.png)
  
-## 验证 erueka 高可用集群:
+## 验证 eureka 高可用集群:
 
 * **集群内访问**: 
 
@@ -62,11 +62,28 @@ Notes: 建议使用 服务名+ 端口的访问方式.
 
 ![公网健康检查](docs/yun_gongwang_health.PNG)
 
+## eureka 高可用集群运维管理
+在 `应用管理界面` 点击创建的 `spring cloud 应用`
+
+![点击实例](docs/yun_pod.png)
+
+进入应用的运维管理界面
+
+![实例概括](docs/yun_pod_gaikuo.png)
+
+> * **实例列表** : 查看该应用的实例基本信息,例如: 资源限制、部署节点等.
+> * **访问方式** : 增加访问 该应用的方式. 例如原本部署的时候是集群内访问,可以通过增加访问方式, 实现在集群外甚至是公网访问该应用.
+> * **更新升级** : 更改部署应用的环境变量, 资源配置, 健康检查 等.
+> * **运行日志** : 查看应用实例的 运行日志.
+
+
 ## 本地SpringCloud应用接入云上eureka集群
 
 本例演示了2个本地SpringCloud应用[**eureka-client-provider**](/eureka-client-provider)(服务提供者)
 和[**eureka-client-consumer-feign**](/eureka-client-consumer-feign)(服务消费者)
 如何通过公网访问的`eureka`集群实现服务注册和服务发现.
+
+![euerka 模型](docs/eureka_module.png)
 
 #### 启动服务提供者
 
@@ -88,6 +105,7 @@ mvn clean install
 java -Deureka.client.service-url.defaultZone=http://{eureka外部访问地址}/eureka/ -jar target/eureka-client-consumer-feign-0.0.1-SNAPSHOT.jar 
 ```
 
+
 #### 发起请求调用服务消费者
 
 ```bash
@@ -95,6 +113,8 @@ curl -s http://127.0.0.1:8778/sayHello
 # hello, huawei. There is cse with port : 8776
 ```
 
-Notes: 以上服务消费者借助Feign能力调用服务提供者的接口,如果习惯使用RestTemplate,这里提供另一种实现[**eureka-client-consumer-ribbon**](/eureka-client-consumer-ribbon) 
+
+
+Notes: 以上服务消费者借助Feign能力调用服务提供者的接口,如果习惯使用`RestTemplate`,这里提供另一种实现[**eureka-client-consumer-ribbon**](/eureka-client-consumer-ribbon) 
 
 ## enjoy your eureka cluster ! 

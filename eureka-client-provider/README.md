@@ -80,4 +80,4 @@ public class EurekaSampleController {
 
 * 启动该项目,可以去 eureka 查看实例注册情况.
 
-![provider](../readme/yun_provider.png)
+![provider](../docs/yun_provider.png)
