@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HelloWorldService {
 
   @Autowired
-  HelloWorldInt helloWorldInt;
+  HelloWorldIntf helloWorldIntf;
 
   @RequestMapping("/sayHello")
   public String sayHello() {
-    String result = helloWorldInt.sayHello();
+    String result = helloWorldIntf.sayHello();
     return result == null ? "ERROR" : result;
   }
 }

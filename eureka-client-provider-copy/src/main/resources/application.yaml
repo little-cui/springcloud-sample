@@ -1,5 +1,5 @@
 server:
-  port: 8776
+  port: 8989
 spring:
   application:
     name: default-eureka-provider

@@ -11,5 +11,6 @@
   <modules>
     <module>eureka-client-provider</module>
     <module>eureka-client-consumer-ribbon</module>
+    <module>eureka-client-consumer-feign</module>
   </modules>
 </project>
