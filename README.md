@@ -51,16 +51,27 @@
  
  ![eureka 启动成功](readme/yum_chakan.png)
  
-##验证 erueka 高可用集群:
+## 验证 erueka 高可用集群:
 
 * **集群内访问**: ps : 建议使用 服务名+ 端口的访问方式.  
 
 ![curl_yun](readme/yun_curl.PNG) 
 
-* **VPC内 访问**:
+* **VPC内 访问** :
 
 ![VPC 内部访问](readme/yun_VPC.PNG)
 
-* **公网访问**:
+* **公网访问** :
 
 ![公网访问](readme/yun_eureka.png)
+
+## 创建 eureka 生产者和消费者
+
+1. **eureka-client-provider** :  示例生产者
+2. **eureka-client-provider-copy** : 示例生产者
+3. **eureka-client-consumer-ribbon** : rest + ribbon 示例 消费者
+4. **eureka-client-consumer-feign** : Feign 示例 消费者
+
+ps : 测试 轮询负载均衡,要同时启动 **eureka-client-provider** 和 **eureka-client-provider-copy** 模块.
+
+## enjoy your eureka cluster ! 
