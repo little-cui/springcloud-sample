@@ -57,13 +57,25 @@
 
 ![curl_yun](readme/yun_curl.PNG) 
 
+**健康检查**
+
+![集群内健康检查](readme/yun_eureka_health.PNG)
+
 * **VPC内 访问** :
 
 ![VPC 内部访问](readme/yun_VPC.PNG)
 
+**健康检查**
+
+![VPC内健康检查](readme/yun_vpc_health.PNG)
+
 * **公网访问** :
 
 ![公网访问](readme/yun_eureka.png)
+
+**健康检查**
+
+![公网健康检查](readme/yun_gongwang_health.PNG)
 
 ## 创建 eureka 生产者和消费者
 
