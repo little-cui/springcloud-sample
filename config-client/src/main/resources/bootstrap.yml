@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: rkd-config-client
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: rkd-cofig
+      profile: dev
+      name: foo
+      label: master
+#      username: root
+#      password: hello
+eureka:
+  client:
+    service-url:
+      defaultZone: http://114.116.7.100:8761/eureka/
+    #      defaultZone: http://114.115.143.173:30180
+    #      defaultZone:
+    fetch-registry: true
+    register-with-eureka: false
+
+
