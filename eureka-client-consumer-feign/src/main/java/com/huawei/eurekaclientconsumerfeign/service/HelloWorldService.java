@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Service
 public class HelloWorldService {
 
-  @Autowired
-  HelloWorldIntf helloWorldIntf;
+    @Autowired
+    HelloWorldIntf helloWorldIntf;
 
-  @RequestMapping("/sayHello")
-  public String sayHello() {
-    String result = helloWorldIntf.sayHello();
-    return result == null ? "ERROR" : result;
-  }
+    @RequestMapping("/sayHello")
+    public String sayHello() {
+        String result = helloWorldIntf.sayHello();
+        return result == null ? "ERROR" : "spring-cloud-provider: " + result;
+    }
 }

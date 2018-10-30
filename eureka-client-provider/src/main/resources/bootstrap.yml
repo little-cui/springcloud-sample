@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: spring-cloud-provider
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: configserver
+      profile: dev
+      name: foo
+      label: master
+#      username: root
+#      password: hello
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://114.115.131.208:8761/eureka/
+    fetch-registry: true
+    # register-with-eureka: false
+
+
